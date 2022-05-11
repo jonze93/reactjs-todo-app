@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToDo = ({text, time, date, todo , todos, setTodos}) => {
+const ToDo = ({text, time,  todo , todos, setTodos}) => {
 
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
@@ -17,10 +17,12 @@ const ToDo = ({text, time, date, todo , todos, setTodos}) => {
         }))
     }
     
+
+
     return(
         <div className={`${todo.passed ? "passed": ''}`}>
             <li className={`${todo.completed ? "completed": ''}`}>
-                {text + ' ' + date + ' ' + time}
+                {text + ' ' + time}
             </li>
             <button onClick={completeHandler}>check</button>
             <button onClick={deleteHandler}>delete</button>

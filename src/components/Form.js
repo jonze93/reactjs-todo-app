@@ -1,7 +1,7 @@
 import React from 'react';
 import nextId from "react-id-generator";
 
-const Form = ({setInputText, inputText, setInputTime, inputTime, setInputDate, inputDate, todos, setTodos,  setStatus, timeStatus, setTimeStatus}) =>{
+const Form = ({setInputText, inputText, setInputTime, inputTime, setInputDate, inputDate, todos, setTodos,  setStatus}) =>{
 
     const inputTextHandler = (e) => {
         setInputText(e.target.value);
@@ -9,37 +9,28 @@ const Form = ({setInputText, inputText, setInputTime, inputTime, setInputDate, i
 
     const inputTimeHandler = (e) => {
         setInputTime(e.target.value);
-        console.log(e.target.value);
-
-       var today = new Date();
-       var curTime = today.getHours()+':'+today.getMinutes;
-
-       if(curTime >= e.target.value){
-        setTimeStatus("passed");
-       }
-
-
 
     };
-
-
-
-
-   const inputDateHandler = (e) => {
-        setInputDate(e.target.value);
-
-        console.log(inputDate);
-    };
-
 
     const submitTodoHandler = (e) => {
         e.preventDefault();
-
         var todoId = nextId();
-        
+
+
+       var today = new Date();
+       var curTime = today.getHours()+':'+today.getMinutes();
+
+       console.log(curTime+inputTime);
+       if(curTime > inputTime){
+        setTodos([
+            ...todos, {text: inputText,time: inputTime, date: inputDate, passed: true ,completed: false, id: todoId}
+        ])
+       }else {
+        console.log("else");
         setTodos([
             ...todos, {text: inputText,time: inputTime, date: inputDate, passed: false ,completed: false, id: todoId}
-        ]);
+        ])
+       }
         setInputText("");
         setInputTime("");
         setInputDate("");

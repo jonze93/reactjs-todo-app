@@ -9,8 +9,7 @@ function App() {
   //States
   const [inputText, setInputText] = useState("");
   const [inputTime, setInputTime] = useState("");
-  const [inputDate, setInputDate] = useState("");
-  const [timeStatus, setTimeStatus] = useState([]);
+  const [timeStatus, setTimeStatus] = useState("");
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')) || []);
   const [status, setStatus] = useState("all");
@@ -21,7 +20,6 @@ function App() {
   useEffect(() => {
     saveLocalTodos();
     filterHandler();
-    timeStatusHandler();
   }, [todos, status]);
 
   //Funktioner
@@ -40,19 +38,6 @@ function App() {
     }
   };
 
-  const timeStatusHandler = () => {
-    switch(timeStatus){
-      case 'missed':
-        setTimeStatus(todos.filter(todo =>todo.timeStatus === true))
-        break;
-      case 'coming':
-        setTimeStatus(todos.filter(todo =>todo.timeStatus === false))
-        break;
-      default:
-        setTimeStatus(todos);
-        break;
-    }
-  };
 
 //spara listan lokalt
 const saveLocalTodos = () => {
@@ -64,10 +49,8 @@ const saveLocalTodos = () => {
       <Form 
         inputText={inputText}
         inputTime={inputTime}
-        inputDate={inputDate}
         setInputText={setInputText}
         setInputTime={setInputTime}
-        setInputDate={setInputDate}
 
         timeStatus={timeStatus}
         setTimeStatus={setTimeStatus}
